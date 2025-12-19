@@ -1,0 +1,69 @@
+# ===============================
+# BASIC STATISTICS PROJECT
+# ===============================
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset (change filename if needed)
+data = pd.read_csv("data.csv")
+
+# Display basic info
+print("First 5 Rows of Dataset:")
+print(data.head())
+
+print("\nDataset Shape:", data.shape)
+print("\nDataset Information:")
+data.info()
+
+print("\nMissing Values:")
+print(data.isnull().sum())
+
+# Select numerical columns
+numerical_data = data.select_dtypes(include=['int64', 'float64'])
+
+# Descriptive statistics
+print("\nDescriptive Statistics:")
+print(numerical_data.describe())
+
+# Mean, Median, Mode
+mean_values = numerical_data.mean()
+median_values = numerical_data.median()
+mode_values = numerical_data.mode().iloc[0]
+
+print("\nMean Values:\n", mean_values)
+print("\nMedian Values:\n", median_values)
+print("\nMode Values:\n", mode_values)
+
+# Variance and Standard Deviation
+variance = numerical_data.var()
+std_deviation = numerical_data.std()
+
+print("\nVariance:\n", variance)
+print("\nStandard Deviation:\n", std_deviation)
+
+# Histograms
+numerical_data.hist(figsize=(12,8))
+plt.suptitle("Histogram of Numerical Features")
+plt.show()
+
+# Boxplot for outlier detection
+plt.figure(figsize=(12,6))
+sns.boxplot(data=numerical_data)
+plt.title("Box Plot for Outlier Detection")
+plt.show()
+
+# Correlation heatmap
+correlation_matrix = numerical_data.corr()
+plt.figure(figsize=(10,6))
+sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm")
+plt.title("Correlation Heatmap")
+plt.show()
+
+# Final Summary
+print("\n----- PROJECT SUMMARY -----")
+print("This project demonstrates the application of basic statistical techniques.")
+print("Measures like mean, median, mode, variance, and standard deviation were used.")
+print("Visualizations helped analyze data distribution, outliers, and relationships.")
